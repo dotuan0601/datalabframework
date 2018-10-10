@@ -144,9 +144,9 @@ class SparkEngine():
             url = "jdbc:mongodb://{}:{}@{}:{}/{}".format(pd['username'], pd['password'], pd['hostname'],
                                                          pd.get('port', '27017'), pd['database'])
             print("Mongo JDBC URL: {}" . format(url))
-            driver = "mongodb.jdbc.MongoDriver"
+            driver = "org.mongodb.jdbc.Driver"
             obj = self._ctx.read.format('jdbc').option('url', url) \
-                .option("dbtable", md['path']) \
+                .option("dbtable", md['path']).option("driver", driver) \
                 .option("user", pd['username']).option('password', pd['password']) \
                 .load(**options)
         else:
