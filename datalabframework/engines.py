@@ -142,7 +142,7 @@ class SparkEngine():
                    .option("user",pd['username']).option('password',pd['password'])\
                    .load(**options)
         else:
-            raise('downt know how to handle this')
+            raise('xxx downt know how to handle this')
         
         obj = obj.repartition(repartition) if repartition else obj
         obj = obj.coalesce(coalesce) if coalesce else obj
@@ -221,7 +221,7 @@ class SparkEngine():
                    .option("user",pd['username']).option('password',pd['password'])\
                    .save(**kargs)
         else:
-            raise('downt know how to handle this')
+            raise('xxx downt know how to handle this')
 
 def get(name):
     global engines
