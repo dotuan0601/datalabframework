@@ -146,7 +146,7 @@ class SparkEngine():
             print("Mongo JDBC URL: {}" . format(url))
             driver = "mongodb.jdbc.MongoDriver"
             obj = self._ctx.read.format('jdbc').option('url', url) \
-                .option("dbtable", md['path']).option("driver", driver) \
+                .option("dbtable", md['path']) \
                 .option("user", pd['username']).option('password', pd['password']) \
                 .load(**options)
         else:
