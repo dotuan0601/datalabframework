@@ -61,6 +61,7 @@ class SparkEngine():
         return self._ctx
 
     def read(self, resource=None, path=None, provider=None, **kargs):
+        raise ('customeize here!!!')
         md = data.metadata(resource, path, provider)
         if not md:
             print('no valid resource found')
