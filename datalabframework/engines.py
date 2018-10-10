@@ -141,7 +141,14 @@ class SparkEngine():
                    .option("user",pd['username']).option('password',pd['password'])\
                    .load(**options)
         elif pd['service'] in ('mongo', 'mongodb'):
-            raise ('say mongo')
+            url = "jdbc:mongodb://{}:{}@{}:{}/{}".format(pd['username'], pd['password'], pd['hostname'],
+                                                         pd.get('port', '27017'), pd['database'])
+            print("Mongo JDBC URL: {}" . format(url))
+            driver = "mongodb.jdbc.MongoDriver"
+            obj = self._ctx.read.format('jdbc').option('url', url) \
+                .option("dbtable", md['path']).option("driver", driver) \
+                .option("user", pd['username']).option('password', pd['password']) \
+                .load(**options)
         else:
             raise('downt know how to handle this')
         
