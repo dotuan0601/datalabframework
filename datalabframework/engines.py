@@ -61,7 +61,6 @@ class SparkEngine():
         return self._ctx
 
     def read(self, resource=None, path=None, provider=None, **kargs):
-        raise ('customeize here!!!')
         md = data.metadata(resource, path, provider)
         if not md:
             print('no valid resource found')
@@ -141,8 +140,10 @@ class SparkEngine():
                    .option("dbtable", md['path']).option("driver", driver)\
                    .option("user",pd['username']).option('password',pd['password'])\
                    .load(**options)
+        elif pd['service'] in ('mongo', 'mongodb'):
+            raise ('say mongo')
         else:
-            raise('xxx downt know how to handle this')
+            raise('downt know how to handle this')
         
         obj = obj.repartition(repartition) if repartition else obj
         obj = obj.coalesce(coalesce) if coalesce else obj
@@ -221,7 +222,7 @@ class SparkEngine():
                    .option("user",pd['username']).option('password',pd['password'])\
                    .save(**kargs)
         else:
-            raise('xxx downt know how to handle this')
+            raise('downt know how to handle this')
 
 def get(name):
     global engines
