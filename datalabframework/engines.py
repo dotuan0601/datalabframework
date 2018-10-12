@@ -142,10 +142,15 @@ class SparkEngine():
                    .load(**options)
         elif pd['service'] in ('mongo', 'mongodb'):
             print("host %s, database %s, collection %s" % (pd['hostname'], pd['database'], md['path']))
-            obj = self._ctx.read.format('com.stratio.datasource.mongodb') \
-                .option("host", pd['hostname']) \
-                .option("credentials", "{},{},{}".format(pd['username'], pd['database'], pd['password'])) \
-                .option("database", pd['database']).option('collection', md['path']) \
+            # obj = self._ctx.read.format('com.stratio.datasource.mongodb') \
+            #     .option("host", pd['hostname']) \
+            #     .option("credentials", "{},{},{}".format(pd['username'], pd['database'], pd['password'])) \
+            #     .option("database", pd['database']).option('collection', md['path']) \
+            #     .load(**options)
+            url = 'mongodb://{}:{}@{}/'.format(pd['username'], pd['password'], pd['hostname'])
+            obj = self._ctx.read.format('com.mongodb.spark.sql.DefaultSource').option('spark.mongodb.input.uri', url) \
+                .option("spark.mongodb.input.collection", md['path']) \
+                .option("spark.mongodb.input.database", pd['database'])\
                 .load(**options)
         else:
             raise('downt know how to handle this')
