@@ -141,6 +141,7 @@ class SparkEngine():
                    .option("user",pd['username']).option('password',pd['password'])\
                    .load(**options)
         elif pd['service'] in ('mongo', 'mongodb'):
+            print("host %s, database %s, collection %s" % (pd['hostname'], pd['database'], md['path']))
             obj = self._ctx.read.format('com.stratio.datasource.mongodb') \
                 .option("host", pd['hostname']) \
                 .option("database", pd['database']).option('collection', md['path']) \
