@@ -11,7 +11,7 @@ which is easily accessible both to humans as machines.
 
 ```
 conda install pip
-pip install git+https://github.com/natbusa/datalabframework.git
+pip install git+https://github.com/dotuan0601/datalabframework.git
 ```
 
 - create an `howto` project with datalabframework
